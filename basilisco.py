@@ -9,13 +9,14 @@ Exercises
 
 """
 
-# A01701879 María José Díaz Sánchez 
+# A01701879 María José Díaz Sánchez
 # A00829556 Santiago Gonzalez Irigoyen
 #Este juego es una versión en python del juego de la serpiente
 
 from turtle import *
 from random import randrange
 from freegames import square, vector
+import random
 
 '''Aquí se crean la comida y el cuerpo de la serpiente a través de vectores'''
 food = vector(0, 0)
@@ -40,10 +41,25 @@ def move():
     head = snake[-1].copy()
     head.move(aim)
 
+    #20% probabilidad de que se mueva la comida en cualquier dirección una 'unidad'
+    c = random.randint(0, 4)
+    if c == 3:
+        #generación de número que decidirá si se mueve arriba, abajo, etc.
+        d = random.randint(0, 3)
+        if d == 0:
+            #aquí se mueve a la derecha
+            food.x = food.x + 10
+        if d == 1:
+            food.x = food.x - 10
+        if d == 2:
+            food.y = food.x + 10
+        if d == 3:
+            food.y = food.x - 10
+
     if not inside(head) or head in snake:
 
-    head = snake[-1].copy()#crea la variable cabeza 
-    head.move(aim)#mueve la cabeza dependiendo 
+    head = snake[-1].copy()#crea la variable cabeza
+    head.move(aim)#mueve la cabeza dependiendo
 
     if not inside(head) or head in snake: #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
 
