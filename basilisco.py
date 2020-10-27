@@ -23,6 +23,11 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+#list of possible colors and random generator
+color = ['purple', 'green', 'yellow', 'orange', 'pink', 'blue']
+f = random.randint(0,5)
+color2 = color[f]
+
 def change(x, y):
     "Change snake direction."
     #Esta función cambia la dirección de la serpiente
@@ -83,20 +88,15 @@ def move():
 
     clear()
 
-    #list of possible colors and random generator
-    color = ['purple', 'green', 'yellow', 'orange', 'pink', 'blue']
-
     for body in snake:
         #generate random index to randomly allocate color for the snake
-        e = random.randint(0, 5)
+        e = f
+        while e == f:
+            e = random.randint(0, 5)
         color1 = color[e]
-        square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es negro
+        square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es variable
 
-    #generate new index for the color of the food
-    e = random.randint(0, 5)
-    color1 = color[e]
-
-    square(food.x, food.y, 9, color1)#construye la comida que es verde
+    square(food.x, food.y, 9, color2)#construye la comida que es variable
     update()
     ontimer(move, 100)
 
@@ -104,11 +104,9 @@ setup(420, 420, 370, 0)#genera el espacio de juego
 hideturtle()
 tracer(False)
 listen()
-#estas funciones son para reconocer las teclas como una forma de mover a la serpiente
-f = random.randint(1, 3)
-onkey(lambda: change(10*f, 0), 'Right')
-onkey(lambda: change(-10*f, 0), 'Left')
-onkey(lambda: change(0*f, 10), 'Up')
-onkey(lambda: change(0*f, -10), 'Down')
+onkey(lambda: change(10, 0), 'Right')
+onkey(lambda: change(-10, 0), 'Left')
+onkey(lambda: change(0, 10), 'Up')
+onkey(lambda: change(0, -10), 'Down')
 move()
 done()
