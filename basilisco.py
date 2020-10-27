@@ -73,7 +73,7 @@ def move():
     if head == food:
         print('Snake:', len(snake))#esto dice el tamaño de la serpiente cada qeu come
         food.x = randrange(-15, 15) * 10
-    snake.append(head)#crea a la serpiente (cuerpo + cabeza)
+        snake.append(head)#crea a la serpiente (cuerpo + cabeza)
     if head == food:#se verifica si la serpiente se comió la comida
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10#esto hace que la comida aparezca en un lugar random
@@ -86,8 +86,7 @@ def move():
     #list of possible colors and random generator
     color = ['black', 'purple', 'green', 'yellow', 'orange', 'pink', 'blue']
     #generate random index to randomly allocate color for the snake
-    e = random.randint(0, 5)
-    print("e: ", str(e))
+    e = random.randint(0, 6)
     color1 = color[e]
 
     for body in snake:
@@ -96,7 +95,6 @@ def move():
     #generate new index for the color of the food
     e = random.randint(0, 6)
     color1 = color[e]
-    print("e: ", str(e))
 
     square(food.x, food.y, 9, color1)#construye la comida que es verde
     update()
