@@ -25,7 +25,7 @@ aim = vector(0, -10)
 
 def change(x, y):
     "Change snake direction."
-    #Esta función cambia la dirección dela serpiente
+    #Esta función cambia la dirección de la serpiente
     aim.x = x
     aim.y = y
 
@@ -58,8 +58,8 @@ def move():
 
     if not inside(head) or head in snake:
 
-    head = snake[-1].copy()#crea la variable cabeza
-    head.move(aim)#mueve la cabeza dependiendo
+        head = snake[-1].copy()#crea la variable cabeza
+        head.move(aim)#mueve la cabeza dependiendo
 
     if not inside(head) or head in snake: #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
 
@@ -71,7 +71,7 @@ def move():
     snake.append(head)
 
     if head == food:
-        print('Snake:', len(snake))
+        print('Snake:', len(snake))#esto dice el tamaño de la serpiente cada qeu come
         food.x = randrange(-15, 15) * 10
     snake.append(head)#crea a la serpiente (cuerpo + cabeza)
     if head == food:#se verifica si la serpiente se comió la comida
@@ -83,17 +83,30 @@ def move():
 
     clear()
 
-    for body in snake:
-        square(body.x, body.y, 9, 'black')
+    #list of possible colors and random generator
+    color = ['black', 'purple', 'green', 'yellow', 'orange', 'pink', 'blue']
+    #generate random index to randomly allocate color for the snake
+    e = random.randint(0, 5)
+    print("e: ", str(e))
+    color1 = color[e]
 
-    square(food.x, food.y, 9, 'green')
+    for body in snake:
+        square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es negro
+
+    #generate new index for the color of the food
+    e = random.randint(0, 6)
+    color1 = color[e]
+    print("e: ", str(e))
+
+    square(food.x, food.y, 9, color1)#construye la comida que es verde
     update()
     ontimer(move, 100)
 
-setup(420, 420, 370, 0)
+setup(420, 420, 370, 0)#genera el espacio de juego
 hideturtle()
 tracer(False)
 listen()
+#estas funciones son para reconocer las teclas como una forma de mover a la serpiente
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
