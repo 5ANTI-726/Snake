@@ -18,6 +18,23 @@ from random import randrange
 from freegames import square, vector
 import random
 
+'''Aquí se genera la lista de colores a usar y se hacen los random para
+la serpiente y la comida'''
+colors = ['pink','yellow','blue','black','purple','orange']
+col_s = random.randint(0,5)
+color_s = colors[col_s]
+col_f = random.randint(0,5)
+color_f = colors[col_f]
+'''Este while checa que los colores sean diferentes entre la comida y 
+serpiente'''
+while col_f == col_s:
+    col_s = random.randint(0,5)
+    color_s = colors[col_s]
+    col_f = random.randint(0,5)
+    color_f = colors[col_f]
+    if col_s != col_f:
+        break
+
 '''Aquí se crean la comida y el cuerpo de la serpiente a través de vectores'''
 food = vector(0, 0)
 snake = [vector(10, 0)]
@@ -60,8 +77,9 @@ def move():
 
         head = snake[-1].copy()#crea la variable cabeza
         head.move(aim)#mueve la cabeza dependiendo
-
-    if not inside(head) or head in snake: #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
+    
+    #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
+    if not inside(head) or head in snake: 
 
         square(head.x, head.y, 9, 'red')
         update()
@@ -71,7 +89,7 @@ def move():
     snake.append(head)
 
     if head == food:
-        print('Snake:', len(snake))#esto dice el tamaño de la serpiente cada qeu come
+        print('Snake:', len(snake))#esto dice el tamaño de la serpiente cada que come
         food.x = randrange(-15, 15) * 10
     snake.append(head)#crea a la serpiente (cuerpo + cabeza)
     if head == food:#se verifica si la serpiente se comió la comida
@@ -83,22 +101,13 @@ def move():
 
     clear()
 
-    #list of possible colors and random generator
-    color = ['black', 'purple', 'green', 'yellow', 'orange', 'pink', 'blue']
-    #generate random index to randomly allocate color for the snake
-    e = random.randint(0, 5)
-    print("e: ", str(e))
-    color1 = color[e]
 
     for body in snake:
-        square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es negro
-
-    #generate new index for the color of the food
-    e = random.randint(0, 6)
-    color1 = color[e]
-    print("e: ", str(e))
-
-    square(food.x, food.y, 9, color1)#construye la comida que es verde
+        #construye el cuerpo de la serpiente que con el color decidido al inicio
+        square(body.x, body.y, 9, color_s)
+    
+    #construye la comida con el color decidido al inicio
+    square(food.x, food.y, 9, color_f)
     update()
     ontimer(move, 100)
 
