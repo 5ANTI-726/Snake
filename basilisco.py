@@ -12,6 +12,7 @@ Exercises
 from turtle import *
 from random import randrange
 from freegames import square, vector
+import random
 
 food = vector(0, 0)
 snake = [vector(10, 0)]
@@ -30,6 +31,20 @@ def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
     head.move(aim)
+
+    #20% probabilidad de que se mueva la comida en cualquier dirección una 'unidad'
+    c = random.randint(0, 4)
+    if c == 3:
+        #generación de número que decidirá si se mueve arriba, abajo, etc.
+        d = random.randint(0, 3)
+        if d == 0:
+            food.x = food.x + 10
+        if d == 1:
+            food.x = food.x - 10
+        if d == 2:
+            food.y = food.x + 10
+        if d == 3:
+            food.y = food.x - 10
 
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
@@ -62,5 +77,6 @@ onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
+
 move()
 done()
