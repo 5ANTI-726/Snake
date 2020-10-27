@@ -24,7 +24,7 @@ aim = vector(0, -10)
 
 def change(x, y):
     "Change snake direction."
-    #Esta función cambia la dirección dela serpiente
+    #Esta función cambia la dirección de la serpiente
     aim.x = x
     aim.y = y
 
@@ -55,7 +55,7 @@ def move():
     snake.append(head)
 
     if head == food:
-        print('Snake:', len(snake))
+        print('Snake:', len(snake))#esto dice el tamaño de la serpiente cada qeu come 
         food.x = randrange(-15, 15) * 10
     snake.append(head)#crea a la serpiente (cuerpo + cabeza)
     if head == food:#se verifica si la serpiente se comió la comida
@@ -68,16 +68,17 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, 'black')#construye el cuerpo de la serpiente que es negro
 
-    square(food.x, food.y, 9, 'green')
+    square(food.x, food.y, 9, 'green')#construye la comida que es verde
     update()
     ontimer(move, 100)
 
-setup(420, 420, 370, 0)
+setup(420, 420, 370, 0)#genera el espacio de juegi 
 hideturtle()
 tracer(False)
 listen()
+#estas funciones son para reconocer las teclas como una forma de mover a la serpiente
 onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
