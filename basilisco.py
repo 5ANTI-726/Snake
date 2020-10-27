@@ -10,7 +10,6 @@ Exercises
 """
 
 # A01701879 María José Díaz Sánchez
-# A01701879 María José Díaz Sánchez
 # A00829556 Santiago Gonzalez Irigoyen
 #Este juego es una versión en python del juego de la serpiente
 
