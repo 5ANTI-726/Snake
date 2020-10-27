@@ -85,11 +85,11 @@ def move():
 
     #list of possible colors and random generator
     color = ['black', 'purple', 'green', 'yellow', 'orange', 'pink', 'blue']
-    #generate random index to randomly allocate color for the snake
-    e = random.randint(0, 6)
-    color1 = color[e]
 
     for body in snake:
+        #generate random index to randomly allocate color for the snake
+        e = random.randint(0, 6)
+        color1 = color[e]
         square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es negro
 
     #generate new index for the color of the food
