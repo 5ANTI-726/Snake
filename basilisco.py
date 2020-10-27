@@ -1,48 +1,29 @@
-"""Snake, classic arcade game.
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to arrow keys.
-
-"""
-
-# A01701879 María José Díaz Sánchez
-# A00829556 Santiago Gonzalez Irigoyen
-#Este juego es una versión en python del juego de la serpiente
-
 from turtle import *
 from random import randrange
 from freegames import square, vector
 import random
 
-'''Aquí se crean la comida y el cuerpo de la serpiente a través de vectores'''
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
-#list of possible colors and random generator
-color = ['purple', 'green', 'yellow', 'orange', 'pink', 'blue']
-f = random.randint(0,5)
-color2 = color[f]
+#color palette
+colors = ['pink','yellow','blue','light green', 'cyan']
+#assign permanent color for food
+a = random.randint(0,4)
+color2 = colors[a]
 
 def change(x, y):
     "Change snake direction."
-    #Esta función cambia la dirección de la serpiente
     aim.x = x
     aim.y = y
 
 def inside(head):
     "Return True if head inside boundaries."
-
-    # Esta función regresa un booleano de verdadero y falso para ver si la cabeza de la serpiente esta dentro de los límites
     return -200 < head.x < 190 and -200 < head.y < 190
 
 def move():
     "Move snake forward one segment."
-
     head = snake[-1].copy()
     head.move(aim)
 
@@ -62,26 +43,15 @@ def move():
             food.y = food.x - 10
 
     if not inside(head) or head in snake:
-
-        head = snake[-1].copy()#crea la variable cabeza
-        head.move(aim)#mueve la cabeza dependiendo
-
-    if not inside(head) or head in snake: #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
-
         square(head.x, head.y, 9, 'red')
         update()
         return
 
-
     snake.append(head)
 
     if head == food:
-        print('Snake:', len(snake))#esto dice el tamaño de la serpiente cada qeu come
-        food.x = randrange(-15, 15) * 10
-        snake.append(head)#crea a la serpiente (cuerpo + cabeza)
-    if head == food:#se verifica si la serpiente se comió la comida
         print('Snake:', len(snake))
-        food.x = randrange(-15, 15) * 10#esto hace que la comida aparezca en un lugar random
+        food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
@@ -89,18 +59,16 @@ def move():
     clear()
 
     for body in snake:
-        #generate random index to randomly allocate color for the snake
-        e = f
-        while e == f:
-            e = random.randint(0, 5)
-        color1 = color[e]
-        square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es variable
+        b = random.randint(0,4)
+        while a == b:
+            b = random.randint(0,4)
+        square(body.x, body.y, 9, colors[b])
 
-    square(food.x, food.y, 9, color2)#construye la comida que es variable
+    square(food.x, food.y, 9, color2)
     update()
     ontimer(move, 100)
 
-setup(420, 420, 370, 0)#genera el espacio de juego
+setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
 listen()
