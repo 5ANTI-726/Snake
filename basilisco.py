@@ -84,16 +84,16 @@ def move():
     clear()
 
     #list of possible colors and random generator
-    color = ['black', 'purple', 'green', 'yellow', 'orange', 'pink', 'blue']
+    color = ['purple', 'green', 'yellow', 'orange', 'pink', 'blue']
 
     for body in snake:
         #generate random index to randomly allocate color for the snake
-        e = random.randint(0, 6)
+        e = random.randint(0, 5)
         color1 = color[e]
         square(body.x, body.y, 9, color1)#construye el cuerpo de la serpiente que es negro
 
     #generate new index for the color of the food
-    e = random.randint(0, 6)
+    e = random.randint(0, 5)
     color1 = color[e]
 
     square(food.x, food.y, 9, color1)#construye la comida que es verde
@@ -105,9 +105,10 @@ hideturtle()
 tracer(False)
 listen()
 #estas funciones son para reconocer las teclas como una forma de mover a la serpiente
-onkey(lambda: change(10, 0), 'Right')
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
+f = random.randint(1, 3)
+onkey(lambda: change(10*f, 0), 'Right')
+onkey(lambda: change(-10*f, 0), 'Left')
+onkey(lambda: change(0*f, 10), 'Up')
+onkey(lambda: change(0*f, -10), 'Down')
 move()
 done()
