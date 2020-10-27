@@ -23,6 +23,15 @@ col_s = random.randint(0,4)#se usa el random para elejir el color
 color_s = colors[col_s]#se crea la variable de color para cada uno
 col_f = random.randint(0,4)
 color_f = colors[col_f]
+'''Este while checa que los colores no sean iguales 
+el uno del otro'''
+while col_f == col_s:
+    col_s = random.randint(0,4)
+    color_s = colors[col_s]
+    col_f = random.randint(0,4)
+    color_f = colors[col_f]
+    if col_s != col_f:
+        break
 
 '''Aquí se crean la comida y el cuerpo de la serpiente a través de vectores'''
 food = vector(0, 0)
@@ -38,7 +47,8 @@ def change(x, y):
 def inside(head):
     "Return True if head inside boundaries."
 
-    # Esta función regresa un booleano de verdadero y falso para ver si la cabeza de la serpiente esta dentro de los límites
+    '''Esta función regresa un booleano de verdadero y falso para ver 
+    si la cabeza de la serpiente esta dentro de los límites'''
     return -200 < head.x < 190 and -200 < head.y < 190
 
 def move():
@@ -68,8 +78,9 @@ def move():
     head = snake[-1].copy()#crea la variable cabeza
     head.move(aim)#mueve la cabeza dependiendo
 
-    if not inside(head) or head in snake: #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
-
+    '''este if es para ver si la serpiente chocó consigo misma 
+    y por ende, el juego debe terminar'''
+    if not inside(head) or head in snake: 
         square(head.x, head.y, 9, 'red')
         update()
         return
@@ -91,7 +102,8 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, 'color_s')#aqui se crea el cuerpo de la serpiente con el color random
+        #aqui se crea el cuerpo de la serpiente con el color random
+        square(body.x, body.y, 9, 'color_s')
 
     square(food.x, food.y, 9, 'color_f')#aqui se crea la comida con el color
     update()
