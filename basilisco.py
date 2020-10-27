@@ -17,6 +17,7 @@ from turtle import *
 from random import randrange
 from freegames import square, vector
 import random
+colors = ['green','yellow','blue','black','purple']
 
 '''Aquí se crean la comida y el cuerpo de la serpiente a través de vectores'''
 food = vector(0, 0)
@@ -43,6 +44,10 @@ def move():
 
     #20% probabilidad de que se mueva la comida en cualquier dirección una 'unidad'
     c = random.randint(0, 4)
+    col_s = random.randint(0,4)
+    color_s = colors[col_s]
+    col_f = random.randint(0,4)
+    color_f = colors[col_f]
     if c == 3:
         #generación de número que decidirá si se mueve arriba, abajo, etc.
         d = random.randint(0, 3)
