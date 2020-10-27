@@ -9,38 +9,58 @@ Exercises
 
 """
 
+# A01701879 María José Díaz Sánchez 
+# A00829556 Santiago Gonzalez Irigoyen
+#Este juego es una versión en python del juego de la serpiente
+
 from turtle import *
 from random import randrange
 from freegames import square, vector
 
+'''Aquí se crean la comida y el cuerpo de la serpiente a través de vectores'''
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
 def change(x, y):
     "Change snake direction."
+    #Esta función cambia la dirección dela serpiente
     aim.x = x
     aim.y = y
 
 def inside(head):
     "Return True if head inside boundaries."
+
+    # Esta función regresa un booleano de verdadero y falso para ver si la cabeza de la serpiente esta dentro de los límites
     return -200 < head.x < 190 and -200 < head.y < 190
 
 def move():
     "Move snake forward one segment."
+
     head = snake[-1].copy()
     head.move(aim)
 
     if not inside(head) or head in snake:
+
+    head = snake[-1].copy()#crea la variable cabeza 
+    head.move(aim)#mueve la cabeza dependiendo 
+
+    if not inside(head) or head in snake: #este if es para ver si la serpiente chocó consigo misma y por ende, el juego debe terminar
+
         square(head.x, head.y, 9, 'red')
         update()
         return
+
 
     snake.append(head)
 
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
+    snake.append(head)#crea a la serpiente (cuerpo + cabeza)
+    if head == food:#se verifica si la serpiente se comió la comida
+        print('Snake:', len(snake))
+        food.x = randrange(-15, 15) * 10#esto hace que la comida aparezca en un lugar random
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
