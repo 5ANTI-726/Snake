@@ -48,6 +48,7 @@ def move():
         if d == 3:
             food.y = food.y - 10
 
+#que hacer cuando se some a si misma
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
         update()
@@ -55,6 +56,7 @@ def move():
 
     snake.append(head)
 
+#como comer
     if head == food:
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
@@ -64,9 +66,11 @@ def move():
 
     clear()
 
+#definir posición y color de la serpiente
     for body in snake:
         square(body.x, body.y, 9, color1)
 
+#definir posición y color de la comida
     square(food.x, food.y, 9, color2)
     update()
     ontimer(move, 100)
