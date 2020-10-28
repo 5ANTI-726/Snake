@@ -6,19 +6,15 @@ import random
 food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
-colors = ['pink','yellow','blue','black','purple']
-col_s = random.randint(0,4)
-color_s = colors[col_s]
-col_f = random.randint(0,4)
-color_f = colors[col_f]
-while col_f == col_s:
-    col_s = random.randint(0,4)
-    color_s = colors[col_s]
-    col_f = random.randint(0,4)
-    color_f = colors[col_f]
-    if col_s != col_f:
-        break
-    
+
+colors = ['pink','yellow','light blue','cyan','green']
+
+a = random.randint(0,4)
+b = a
+while a == b:
+    b = random.randint(0,4)
+color1 = colors[a]
+color2 = colors[b]
 
 def change(x, y):
     "Change snake direction."
@@ -33,7 +29,7 @@ def move():
     "Move snake forward one segment."
     head = snake[-1].copy()
     head.move(aim)
-    
+
     #20% probabilidad de que se mueva la comida en cualquier dirección una 'unidad'
     c = random.randint(0, 4)
     if c == 3:
@@ -66,9 +62,9 @@ def move():
     clear()
 
     for body in snake:
-        square(body.x, body.y, 9, color_s)
+        square(body.x, body.y, 9, color1)
 
-    square(food.x, food.y, 9, color_f)
+    square(food.x, food.y, 9, color2)
     update()
     ontimer(move, 100)
 
