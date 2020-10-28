@@ -7,8 +7,10 @@ food = vector(0, 0)
 snake = [vector(10, 0)]
 aim = vector(0, -10)
 
+#color library
 colors = ['pink','yellow','light blue','cyan','green']
 
+#assign two different colors to the snake and the food
 a = random.randint(0,4)
 b = a
 while a == b:
@@ -16,6 +18,7 @@ while a == b:
 color1 = colors[a]
 color2 = colors[b]
 
+#change direction by choosing heading coordinates
 def change(x, y):
     "Change snake direction."
     aim.x = x
@@ -30,20 +33,20 @@ def move():
     head = snake[-1].copy()
     head.move(aim)
 
-    #20% probabilidad de que se mueva la comida en cualquier dirección una 'unidad'
-    c = random.randint(0, 4)
-    if c == 3:
-        #generación de número que decidirá si se mueve arriba, abajo, etc.
+    #20% probabilidad de que la comida se mueva
+    c = random.randint(0, 3)
+    if c == 2:
+        #dirección de movimiento
         d = random.randint(0, 3)
         if d == 0:
-            #aquí se mueve a la derecha
+            #movimiento una unidad a la derecha
             food.x = food.x + 10
         if d == 1:
             food.x = food.x - 10
         if d == 2:
-            food.y = food.x + 10
+            food.y = food.y + 10
         if d == 3:
-            food.y = food.x - 10
+            food.y = food.y - 10
 
     if not inside(head) or head in snake:
         square(head.x, head.y, 9, 'red')
